@@ -1,11 +1,9 @@
-
 import 'package:bytebankapi/database/dao/contact_dao.dart';
 import 'package:bytebankapi/models/contact.dart';
 import 'contact_form.dart';
 import 'package:flutter/material.dart';
 
 class ContactsList extends StatefulWidget {
-
   @override
   _ContactsListState createState() => _ContactsListState();
 }
@@ -17,6 +15,7 @@ class _ContactsListState extends State<ContactsList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green[900],
         title: Text('Transfer'),
       ),
       body: FutureBuilder<List<Contact>>(
@@ -37,7 +36,6 @@ class _ContactsListState extends State<ContactsList> {
                   ],
                 ),
               );
-              break;
             case ConnectionState.active:
               break;
             case ConnectionState.done:
@@ -49,18 +47,19 @@ class _ContactsListState extends State<ContactsList> {
                 },
                 itemCount: contacts!.length,
               );
-              break;
           }
           return Text('Unknown error');
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => ContactForm(),
-            ),
-          ).then((value) => setState(() {}));
+          Navigator.of(context)
+              .push(
+                MaterialPageRoute(
+                  builder: (context) => ContactForm(),
+                ),
+              )
+              .then((value) => setState(() {}));
         },
         child: Icon(
           Icons.add,

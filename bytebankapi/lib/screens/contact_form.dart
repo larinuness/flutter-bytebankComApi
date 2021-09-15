@@ -1,4 +1,3 @@
-
 import 'package:bytebankapi/database/dao/contact_dao.dart';
 import 'package:bytebankapi/models/contact.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,7 @@ class _ContactFormState extends State<ContactForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green[900],
         title: Text('New contact'),
       ),
       body: Padding(
