@@ -1,6 +1,6 @@
-import '../../models/contact.dart';
+import 'package:bytebank/models/contact.dart';
 import 'package:sqflite/sqflite.dart';
-import '../app_database.dart';
+import 'package:bytebank/database/app_database.dart';
 
 class ContactDao {
 
@@ -34,7 +34,7 @@ class ContactDao {
   }
 
   List<Contact> _toList(List<Map<String, dynamic>> result) {
-    final List<Contact> contacts = [];
+    final List<Contact> contacts = List();
     for (Map<String, dynamic> row in result) {
       final Contact contact = Contact(
         row[_id],

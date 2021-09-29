@@ -5,15 +5,16 @@ class Transaction {
   final Contact contact;
 
   Transaction(
-    this.value,
-    this.contact,
-  );
+      this.value,
+      this.contact,
+      );
 
-  Transaction.fromJson(Map<String, dynamic> json)
-      : value = json['value'],
-        contact = Contact.fromJson(json['contact']);
+  Transaction.fromJson(Map<String, dynamic> json) :
+      value = json['value'],
+      contact = Contact.fromJson(json['contact']);
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         'value': value,
         'contact': contact.toJson(),
       };
@@ -22,4 +23,5 @@ class Transaction {
   String toString() {
     return 'Transaction{value: $value, contact: $contact}';
   }
+
 }

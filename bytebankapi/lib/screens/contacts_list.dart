@@ -1,10 +1,9 @@
+import 'package:bytebank/components/progress.dart';
+import 'package:bytebank/database/dao/contact_dao.dart';
+import 'package:bytebank/models/contact.dart';
+import 'package:bytebank/screens/contact_form.dart';
+import 'package:bytebank/screens/transaction_form.dart';
 import 'package:flutter/material.dart';
-
-import '../components/progress.dart';
-import '../database/dao/contact_dao.dart';
-import '../models/contact.dart';
-import 'contact_form.dart';
-import 'transaction_form.dart';
 
 class ContactsList extends StatefulWidget {
   @override
@@ -21,7 +20,7 @@ class _ContactsListState extends State<ContactsList> {
         title: Text('Transfer'),
       ),
       body: FutureBuilder<List<Contact>>(
-        initialData: [],
+        initialData: List(),
         future: _dao.findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
@@ -29,13 +28,14 @@ class _ContactsListState extends State<ContactsList> {
               break;
             case ConnectionState.waiting:
               return Progress();
+              break;
             case ConnectionState.active:
               break;
             case ConnectionState.done:
-              final List<Contact>? contacts = snapshot.data;
+              final List<Contact> contacts = snapshot.data;
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final Contact contact = contacts![index];
+                  final Contact contact = contacts[index];
                   return _ContactItem(
                     contact,
                     onClick: () {
@@ -47,21 +47,20 @@ class _ContactsListState extends State<ContactsList> {
                     },
                   );
                 },
-                itemCount: contacts!.length,
+                itemCount: contacts.length,
               );
+              break;
           }
           return Text('Unknown error');
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context)
-              .push(
-                MaterialPageRoute(
-                  builder: (context) => ContactForm(),
-                ),
-              )
-              .then((value) => setState(() {}));
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ContactForm(),
+            ),
+          ).then((value) => setState(() {}));
         },
         child: Icon(
           Icons.add,
@@ -77,7 +76,7 @@ class _ContactItem extends StatelessWidget {
 
   _ContactItem(
     this.contact, {
-    required this.onClick,
+    @required this.onClick,
   });
 
   @override
